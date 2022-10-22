@@ -1,0 +1,16 @@
+{
+  "extends": "@vue/tsconfig/tsconfig.node.json",
+  "include": ["vite.config.*", "vitest.config.*", "cypress.config.*"],
+  "compilerOptions": {
+    "composite": true,
+    "types": ["node","naive-ui/volar"],
+    "isolatedModules": true,//compilerOptions.isolatedModules 应当设置为 true，因为 Vite 使用 esbuild 来转译 TypeScript，并受限于单文件转译的限制。
+    "strict": true,//它是 strict 模式的一部分)，才可以获得对组件选项中 this 的类型检查。否则 this 会被认为是 any。
+    "paths": {
+      //如果你在构建工具中配置了路径解析别名，例如 @/* 这个别名被默认配置在了 create-vue 项目中，你需要通过 compilerOptions.paths 选项为 TypeScript 再配置一遍。
+      "@/*": ["./src/*"]
+    },
+    "target": "es5",
+    "lib": ["es2015"]
+  }
+}
